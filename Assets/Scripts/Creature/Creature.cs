@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour, ICreature
 {
-    private int maxHitPoints = 10;
-    private int currentHitPoints = 10;
+    protected int maxHitPoints = 10;
+    protected int currentHitPoints = 10;
 
-    private int maxMagicPoints = 10;
-    private int currentMagicPoints = 10;
+    protected int maxMagicPoints = 10;
+    protected int currentMagicPoints = 10;
 
-    private int attack = 10;
-    private int Luck = 10;
+    protected int attack = 10;
+    protected int luck = 10;
 
-    private int maxLevel = 50;
-    private int currentLevel = 1;
+    protected int maxLevel = 50;
+    protected int currentLevel = 1;
 
     public int CalculateAttack()
     {
@@ -41,4 +41,5 @@ public class Creature : MonoBehaviour, ICreature
     {
         throw new NotImplementedException();
     }
+
 }

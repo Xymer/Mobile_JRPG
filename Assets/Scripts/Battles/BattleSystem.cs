@@ -2,30 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum BattleState
-{
-    Start = 0,
-    PlayerTurn,
-    EnemyTurn,
-    Win,
-    Lose
-}
+
 public class BattleSystem : MonoBehaviour
 {
+    enum BattleState
+    {
+        Start = 0,
+        PlayerTurn,
+        EnemyTurn,
+        Win,
+        Lose
+    }
+
     BattleState currentState;
-
-
-
-
-
+    int currentTurn = 0;
 
     /// <summary>
-    /// Start the battle and set if the player or Enemy should start
+    /// Initalize the battle and set if the player or Enemy should start
     /// </summary>
     /// <returns></returns>
-    private void StartBattle(BattleState startingCharacterState)
+    private void InitalizeBattle()
     {
-       //TODO: Implement StartBattle
+        currentTurn = 1;
+        currentState = BattleState.PlayerTurn;
     }
     /// <summary>
     /// Changes the state of the current battle
@@ -49,4 +48,6 @@ public class BattleSystem : MonoBehaviour
     {
         //TODO: Implement Lose Condition
     }
+
+
 }
