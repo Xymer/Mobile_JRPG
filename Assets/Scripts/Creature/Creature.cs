@@ -5,24 +5,31 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour, ICreature
 {
-    protected int maxHitPoints = 10;
-    protected int currentHitPoints = 10;
+    //public Creature_SO creatureData;
 
-    protected int maxMagicPoints = 10;
-    protected int currentMagicPoints = 10;
+    protected int maxHitPoints = 0;
+    protected int currentHitPoints = 0;
 
-    protected int attack = 10;
-    protected int luck = 10;
+    protected int maxMagicPoints = 0;
+    protected int currentMagicPoints = 0;
 
-    protected int maxLevel = 50;
-    protected int currentLevel = 1;
+    protected int attack = 0;
+    protected int defence = 0;
 
-    public int CalculateAttack()
+    protected int luck = 0;
+
+    protected int agility = 0;
+
+    protected bool killed = false;
+
+    public int CalculateAttack(Creature otherCreature)
     {
-        throw new NotImplementedException();
+        int totalDamage = attack * (100 / 100 + otherCreature.defence);
+
+        return totalDamage;
     }
 
-    public int CalculateSpellAttack()
+    public int CalculateSpellAttack(Creature otherCreature)
     {
         throw new NotImplementedException();
     }
@@ -32,14 +39,22 @@ public class Creature : MonoBehaviour, ICreature
         throw new NotImplementedException();
     }
 
-    public void Attack()
+    public void Attack(Creature otherCreature)
     {
-        throw new NotImplementedException();
+        int toAttack = CalculateAttack(otherCreature);
+
+        otherCreature.TakeDamage(toAttack);
+
+        //throw new NotImplementedException();
     }
 
-    public int TakeDamage(int damageIn)
+    public void TakeDamage(int damageIn)
     {
-        throw new NotImplementedException();
+        currentHitPoints = -damageIn;
+
+        if (currentHitPoints <= 0)
+            killed = true;
+        //throw new NotImplementedException();
     }
 
 }

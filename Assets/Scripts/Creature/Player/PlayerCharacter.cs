@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerCharacter : Creature, IPlayer
 {
+
+    public Player_SO playerData;
+    private int currentLevel = 1;
     private int experiencePoints = 0;
 
     private int experiencePointsToNextLevel = 100;
@@ -43,11 +46,20 @@ public class PlayerCharacter : Creature, IPlayer
     }
     private void Initalize()
     {
-        maxHitPoints = 10;
-        currentHitPoints = maxHitPoints;
+        if (playerData == null)
+            throw new NullReferenceException();
 
-        attack = 10;
-        luck = 10;
-        currentLevel = 1;
+        maxHitPoints = playerData.maxHitPoints;
+        currentHitPoints = playerData.maxHitPoints;
+
+        maxMagicPoints = playerData.maxMagicPoints;
+        currentMagicPoints = playerData.maxMagicPoints;
+
+        attack = playerData.attack;
+        defence = playerData.defence;
+
+        luck = playerData.luck;
+        agility = playerData.agility;
+
     }
 }
