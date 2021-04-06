@@ -7,6 +7,7 @@ public class BattleUI : MonoBehaviour
 {
     
     private PlayerCharacter player;
+    private Enemy targetedEnemy;
     private BattleManager battleManager; 
     [SerializeField] private Button attackButton;
     [SerializeField] private Button skillButton;
@@ -27,10 +28,11 @@ public class BattleUI : MonoBehaviour
     }
     private void Initalize()
     {
-        player = FindObjectOfType<PlayerCharacter>();
         battleManager = FindObjectOfType<BattleManager>();
+        player = FindObjectOfType<PlayerCharacter>();
+        targetedEnemy = FindObjectOfType<Enemy>();
 
-        attackButton.onClick.AddListener(player.Attack);
+        attackButton.onClick.AddListener(delegate { player.Attack(targetedEnemy); });
         attackButton.onClick.AddListener(battleManager.AddTurn);
     }
     private void SetClickableButtons(BattleState battleState)

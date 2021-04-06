@@ -24,8 +24,8 @@ public class Creature : MonoBehaviour, ICreature
 
     public int CalculateAttack(Creature otherCreature)
     {
-        int totalDamage = attack * (100 / 100 + otherCreature.defence);
-
+        int totalDamage = attack * Mathf.RoundToInt((100f / (100f + otherCreature.defence)));
+        Debug.Log("Damage: " + totalDamage);
         return totalDamage;
     }
 
@@ -50,10 +50,11 @@ public class Creature : MonoBehaviour, ICreature
 
     public void TakeDamage(int damageIn)
     {
-        currentHitPoints = -damageIn;
+        currentHitPoints -= damageIn;
 
         if (currentHitPoints <= 0)
             killed = true;
+        Debug.Log("Current HP: " +currentHitPoints);
         //throw new NotImplementedException();
     }
 

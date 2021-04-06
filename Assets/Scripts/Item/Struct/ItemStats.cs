@@ -5,7 +5,7 @@ using UnityEngine;
 public struct ItemStats
 {
     int attack;
-    int defense;
+    int defence;
     int healthPoints;
     int luck;
 }
