@@ -5,7 +5,6 @@ using UnityEngine;
 
 public interface IPlayer
 {
-    
     void LevelUp();
     void AddExperiencePoints(int pointsToAdd);
     void EquipItem();
