@@ -13,10 +13,16 @@ public enum BattleState
 
 public class BattleManager : MonoBehaviour
 {
+
+
     private delegate void OnChangeStateDelegate();
     private event OnChangeStateDelegate OnChangeState;
+    
     int currentTurn = 0;
     private BattleState currentState;
+
+    private List<Creature> BattleOrder;
+    
     public BattleState CurrentState { 
         get { return currentState; }
         private set { currentState = value; }
@@ -71,5 +77,11 @@ public class BattleManager : MonoBehaviour
     {
         currentTurn++;
         Debug.Log("Turn: " + currentTurn);
+    }
+
+
+    private void CreateStartOrder()
+    {
+
     }
 }

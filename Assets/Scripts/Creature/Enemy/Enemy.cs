@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-[CreateAssetMenu]
+
 public class Enemy : Creature
 {
     public Enemy_SO enemyData;
