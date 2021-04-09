@@ -13,7 +13,7 @@ public class PlayerCharacter : Creature, IPlayer
     private int experiencePointsToNextLevel = 100;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Initalize();
     }

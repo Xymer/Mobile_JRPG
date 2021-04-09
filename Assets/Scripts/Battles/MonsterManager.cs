@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MonsterManager : MonoBehaviour
 {
+    public GameObject EnemySpawnPoint;
     public List<GameObject> enemies;
 
     void Start()
@@ -13,14 +14,28 @@ public class MonsterManager : MonoBehaviour
         {
             throw new NullReferenceException();
         }
+
+        if (EnemySpawnPoint == null)
+            throw new NullReferenceException();
     }
 
-    public List<GameObject> GetMonstersForBattle(int MonstersToSpawn)
+    /// <summary>
+    /// Get a set amount of enemies for the battle.<br/>
+    /// Will be improved as time goes on. 
+    /// </summary>
+    /// <param name="SpawnAmount">How many enemies to spawn</param>
+    /// <returns>The carefully selected monsters for the battle.</returns>
+    public List<Enemy> GetMonstersForBattle(int SpawnAmount)
     {
-        List<GameObject> enemiesToSpawn = new List<GameObject>();
+        List<Enemy> EnemiesInBattle = new List<Enemy>();
 
+        for (int i = 0; i < SpawnAmount; i++)
+        {
+            GameObject go = Instantiate(enemies[i], EnemySpawnPoint.transform.position, EnemySpawnPoint.transform.rotation);
+            Enemy e = go.GetComponent<Enemy>();
+            EnemiesInBattle.Add(e);
+        }
 
-        return enemiesToSpawn;
+        return EnemiesInBattle;
     }
-
 }

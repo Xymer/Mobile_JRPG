@@ -21,6 +21,7 @@ public class Creature : MonoBehaviour, ICreature
     protected int agility = 0;
 
     protected bool killed = false;
+    public int GetAgility() { return agility; }
 
     public int CalculateAttack(Creature otherCreature)
     {

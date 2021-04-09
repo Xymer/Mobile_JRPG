@@ -21,3 +21,5 @@ MonoBehaviour:
   luck: 15
   agility: 6
   enemyName: Slime boii
+  expDrop: 1
+  goldDrop: 2

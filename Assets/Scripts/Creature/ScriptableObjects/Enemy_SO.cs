@@ -6,4 +6,6 @@ using UnityEngine;
 public class Enemy_SO : Creature_SO
 {
     public string enemyName;
+    public int expDrop;
+    public int goldDrop;
 }

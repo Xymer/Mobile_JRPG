@@ -7,9 +7,17 @@ public class Enemy : Creature
 {
     public Enemy_SO enemyData;
 
-    private void Start()
+    private int expDrop = 0;
+    private int goldDrop = 0;
+
+    private void OnEnable()
     {
         Initalize();
+    }
+
+    private void OnDisable()
+    {
+        
     }
 
     private void Initalize()
@@ -29,6 +37,9 @@ public class Enemy : Creature
         luck = enemyData.luck;
         agility = enemyData.agility;
 
+        expDrop = enemyData.expDrop;
+        goldDrop = enemyData.goldDrop;
+
     }
 
     // Update is called once per frame
@@ -36,4 +47,10 @@ public class Enemy : Creature
     {
         
     }
+
+    public void Defeated()
+    {
+
+    }
+
 }
