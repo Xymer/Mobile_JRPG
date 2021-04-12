@@ -17,8 +17,8 @@ public class BattleManager : MonoBehaviour
     private PlayerCharacter Player;
     private MonsterManager mm;
 
-    private delegate void OnChangeStateDelegate();
-    private event OnChangeStateDelegate OnChangeState;
+    public delegate void OnChangeStateDelegate();
+    public event OnChangeStateDelegate OnChangeState;
 
     int currentTurn = 0;
     private BattleState currentState;
@@ -26,6 +26,7 @@ public class BattleManager : MonoBehaviour
     private List<Enemy> EnemiesInCurrentBattle = new List<Enemy>();
     private List<Creature> BattleOrder = new List<Creature>();
 
+    bool isBattleWon = false;
     public BattleState CurrentState
     {
         get { return currentState; }
@@ -49,6 +50,14 @@ public class BattleManager : MonoBehaviour
     private void Update()
     {
         //Wait for input, Do attack , Deal damage, wait about 1 second then enemy decides what to do
+        if (EnemiesInCurrentBattle.Count == 0 && !isBattleWon)
+        {
+            WinBattle();
+        }
+        else if (isBattleWon)
+        {
+            // End battle and do stuff
+        }
     }
     /// <summary>
     /// Initalize the battle and set if the player or Enemy should start
@@ -69,7 +78,16 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void ChangeState(BattleState nextState)
     {
-        //TODO: Implement ChangeState
+        if (currentState == nextState)
+        {
+            return;
+        }
+        else
+        {
+            currentState = nextState;
+            OnChangeState.Invoke();
+        }
+
     }
 
     /// <summary>
@@ -77,7 +95,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void WinBattle()
     {
-        //TODO: Implement Win condition 
+        isBattleWon = true;
     }
     /// <summary>
     /// This happends when you lose a battle
@@ -90,6 +108,18 @@ public class BattleManager : MonoBehaviour
     public void AddTurn()
     {
         currentTurn++;
+        if (currentState == BattleState.Win || currentState == BattleState.Lose)
+        {
+            return;
+        }
+        else if (currentState == BattleState.PlayerTurn)
+        {
+            ChangeState(BattleState.EnemyTurn);
+        }
+        else if (currentState == BattleState.EnemyTurn)
+        {
+            ChangeState(BattleState.PlayerTurn);
+        }
         Debug.Log("Turn: " + currentTurn);
     }
 
@@ -140,7 +170,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                if(UsfulFunctions.GetRandomBool())
+                if (UsfulFunctions.GetRandomBool())
                 {
                     BattleOrder.Add(Player);
                     BattleOrder.Add(EnemiesInCurrentBattle[i]);
