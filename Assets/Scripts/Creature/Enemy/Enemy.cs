@@ -52,5 +52,8 @@ public class Enemy : Creature
     {
 
     }
-
+    public void TemporaryPassTurn()
+    {
+        
+    }
 }

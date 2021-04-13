@@ -61,5 +61,6 @@ public class PlayerCharacter : Creature, IPlayer
         luck = playerData.luck;
         agility = playerData.agility;
 
+        
     }
 }

@@ -56,6 +56,7 @@ public class BattleManager : MonoBehaviour
         }
         else if (isBattleWon)
         {
+
             // End battle and do stuff
         }
     }
@@ -96,6 +97,10 @@ public class BattleManager : MonoBehaviour
     private void WinBattle()
     {
         isBattleWon = true;
+        foreach (Creature creature in BattleOrder)
+        {
+            creature.OnEndTurn -= AddTurn;
+        }
     }
     /// <summary>
     /// This happends when you lose a battle
@@ -103,6 +108,10 @@ public class BattleManager : MonoBehaviour
     private void LoseBattle()
     {
         //TODO: Implement Lose Condition
+        foreach (Creature creature in BattleOrder)
+        {
+            creature.OnEndTurn += AddTurn;
+        }
     }
 
     public void AddTurn()
@@ -182,7 +191,10 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
-
+        foreach (Creature creature in BattleOrder)
+        {
+            creature.OnEndTurn += AddTurn;
+        }
 
     }
 

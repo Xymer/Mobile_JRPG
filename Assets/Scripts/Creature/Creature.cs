@@ -6,6 +6,11 @@ using UnityEngine;
 public class Creature : MonoBehaviour, ICreature
 {
     //public Creature_SO creatureData;
+    public delegate void OnEndTurnDelegate();
+    public event OnEndTurnDelegate OnEndTurn;
+
+    public delegate void OnStartTurnDelegate();
+    public event OnStartTurnDelegate OnStartTurn;
 
     protected int maxHitPoints = 0;
     protected int currentHitPoints = 0;
@@ -37,7 +42,9 @@ public class Creature : MonoBehaviour, ICreature
 
     public void SpellAttack()
     {
-        throw new NotImplementedException();
+
+
+        OnEndTurn.Invoke();
     }
 
     public void Attack(Creature otherCreature)
@@ -46,7 +53,7 @@ public class Creature : MonoBehaviour, ICreature
 
         otherCreature.TakeDamage(toAttack);
 
-        //throw new NotImplementedException();
+        OnEndTurn.Invoke();
     }
 
     public void TakeDamage(int damageIn)
@@ -56,7 +63,9 @@ public class Creature : MonoBehaviour, ICreature
         if (currentHitPoints <= 0)
             killed = true;
         Debug.Log("Current HP: " +currentHitPoints);
-        //throw new NotImplementedException();
     }
 
+    public void OnTurnTaken()
+    {
+    }
 }

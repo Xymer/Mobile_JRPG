@@ -33,5 +33,11 @@ public interface ICreature
     /// </summary>
     /// <param name="damageIn">How much damage the creature will take</param>
     public void TakeDamage(int damageIn);
+
+
+    /// <summary>
+    /// Event when a creature has ended it's turn
+    /// </summary>
+    public void OnTurnTaken();
 }
 
