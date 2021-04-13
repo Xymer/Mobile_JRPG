@@ -31,7 +31,8 @@ public class MonsterManager : MonoBehaviour
 
         for (int i = 0; i < SpawnAmount; i++)
         {
-            GameObject go = Instantiate(enemies[i], EnemySpawnPoint.transform.position, EnemySpawnPoint.transform.rotation);
+            //We only have one monster atm :P
+            GameObject go = Instantiate(enemies[0], EnemySpawnPoint.transform.position, EnemySpawnPoint.transform.rotation);
             Enemy e = go.GetComponent<Enemy>();
             EnemiesInBattle.Add(e);
         }
