@@ -10,6 +10,8 @@ public class Enemy : Creature
     private int expDrop = 0;
     private int goldDrop = 0;
 
+    private EnemyAI EnemyAI;
+
     private void OnEnable()
     {
         Initalize();
@@ -23,6 +25,11 @@ public class Enemy : Creature
     private void Initalize()
     {
         if (enemyData == null)
+            throw new NullReferenceException();
+
+        EnemyAI = GetComponent<EnemyAI>();
+
+        if (EnemyAI == null)
             throw new NullReferenceException();
 
         maxHitPoints = enemyData.maxHitPoints;
