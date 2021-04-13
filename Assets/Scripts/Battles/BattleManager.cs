@@ -150,38 +150,14 @@ public class BattleManager : MonoBehaviour
         BattleOrder.Clear();
         BattleOrder.TrimExcess();
 
-        int currentAgility = 0;
-        int playerAgility = Player.GetAgility();
 
         for (int i = 0; i < EnemiesInCurrentBattle.Count; i++)
         {
-            currentAgility = EnemiesInCurrentBattle[i].GetAgility();
-            Debug.Log($"Enemy: {currentAgility}, Player: {playerAgility}");
-
-            if (playerAgility > currentAgility)
-            {
-                BattleOrder.Add(Player);
-                BattleOrder.Add(EnemiesInCurrentBattle[i]);
-            }
-            else if (playerAgility < currentAgility)
-            {
-                BattleOrder.Add(EnemiesInCurrentBattle[i]);
-                BattleOrder.Add(Player);
-            }
-            else
-            {
-                if (UsfulFunctions.GetRandomBool())
-                {
-                    BattleOrder.Add(Player);
-                    BattleOrder.Add(EnemiesInCurrentBattle[i]);
-                }
-                else
-                {
-                    BattleOrder.Add(EnemiesInCurrentBattle[i]);
-                    BattleOrder.Add(Player);
-                }
-            }
+            BattleOrder.Add(EnemiesInCurrentBattle[i]);
         }
+
+        BattleOrder.Add(Player);
+        UsefulFunctions.IntersertionSort(BattleOrder);
 
 
     }
