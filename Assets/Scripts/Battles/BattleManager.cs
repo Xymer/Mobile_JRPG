@@ -56,7 +56,6 @@ public class BattleManager : MonoBehaviour
         }
         else if (isBattleWon)
         {
-
             // End battle and do stuff
         }
     }
@@ -97,10 +96,6 @@ public class BattleManager : MonoBehaviour
     private void WinBattle()
     {
         isBattleWon = true;
-        foreach (Creature creature in BattleOrder)
-        {
-            creature.OnEndTurn -= AddTurn;
-        }
     }
     /// <summary>
     /// This happends when you lose a battle
@@ -108,10 +103,6 @@ public class BattleManager : MonoBehaviour
     private void LoseBattle()
     {
         //TODO: Implement Lose Condition
-        foreach (Creature creature in BattleOrder)
-        {
-            creature.OnEndTurn += AddTurn;
-        }
     }
 
     public void AddTurn()
@@ -159,42 +150,15 @@ public class BattleManager : MonoBehaviour
         BattleOrder.Clear();
         BattleOrder.TrimExcess();
 
-        int currentAgility = 0;
-        int playerAgility = Player.GetAgility();
 
         for (int i = 0; i < EnemiesInCurrentBattle.Count; i++)
         {
-            currentAgility = EnemiesInCurrentBattle[i].GetAgility();
-            Debug.Log($"Enemy: {currentAgility}, Player: {playerAgility}");
+            BattleOrder.Add(EnemiesInCurrentBattle[i]);
+        }
 
-            if (playerAgility > currentAgility)
-            {
-                BattleOrder.Add(Player);
-                BattleOrder.Add(EnemiesInCurrentBattle[i]);
-            }
-            else if (playerAgility < currentAgility)
-            {
-                BattleOrder.Add(EnemiesInCurrentBattle[i]);
-                BattleOrder.Add(Player);
-            }
-            else
-            {
-                if (UsfulFunctions.GetRandomBool())
-                {
-                    BattleOrder.Add(Player);
-                    BattleOrder.Add(EnemiesInCurrentBattle[i]);
-                }
-                else
-                {
-                    BattleOrder.Add(EnemiesInCurrentBattle[i]);
-                    BattleOrder.Add(Player);
-                }
-            }
-        }
-        foreach (Creature creature in BattleOrder)
-        {
-            creature.OnEndTurn += AddTurn;
-        }
+        BattleOrder.Add(Player);
+        UsefulFunctions.IntersertionSort(BattleOrder);
+
 
     }
 
