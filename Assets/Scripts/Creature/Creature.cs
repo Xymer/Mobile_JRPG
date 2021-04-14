@@ -28,6 +28,7 @@ public class Creature : MonoBehaviour, ICreature
     protected bool killed = false;
     public int GetAgility() { return agility; }
 
+  
     public int CalculateAttack(Creature otherCreature)
     {
         int totalDamage = attack * Mathf.RoundToInt((100f / (100f + otherCreature.defence)));
@@ -43,7 +44,6 @@ public class Creature : MonoBehaviour, ICreature
     public void SpellAttack()
     {
 
-
         OnEndTurn.Invoke();
     }
 
@@ -54,6 +54,7 @@ public class Creature : MonoBehaviour, ICreature
         otherCreature.TakeDamage(toAttack);
 
         OnEndTurn.Invoke();
+        
     }
 
     public void TakeDamage(int damageIn)
@@ -62,10 +63,15 @@ public class Creature : MonoBehaviour, ICreature
 
         if (currentHitPoints <= 0)
             killed = true;
-        Debug.Log("Current HP: " +currentHitPoints);
+        Debug.Log("Current HP: " + currentHitPoints);
     }
 
-    public void OnTurnTaken()
+    public void StartTurn()
     {
+        if (this is Enemy)
+        {
+            SpellAttack();           
+        }
+        OnStartTurn.Invoke();
     }
 }

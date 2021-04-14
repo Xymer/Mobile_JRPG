@@ -32,7 +32,6 @@ public class BattleUI : MonoBehaviour
         targetedEnemy = FindObjectOfType<Enemy>(true);
 
         attackButton.onClick.AddListener(delegate { player.Attack(targetedEnemy);});
-        attackButton.onClick.AddListener(targetedEnemy.TemporaryPassTurn);
         unclickableButtons.Add(attackButton);
 
         battleManager.OnChangeState += SetClickableButtons; //TODO: Seeing a bug with this later when we add multiple enemies

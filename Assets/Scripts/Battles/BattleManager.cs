@@ -20,12 +20,16 @@ public class BattleManager : MonoBehaviour
     public delegate void OnChangeStateDelegate();
     public event OnChangeStateDelegate OnChangeState;
 
+    public delegate void OnAddTurnDelegate();
+    public event OnAddTurnDelegate OnAddTurn;
+
     int currentTurn = 0;
     private BattleState currentState;
 
     private List<Enemy> EnemiesInCurrentBattle = new List<Enemy>();
     private List<Creature> BattleOrder = new List<Creature>();
 
+    private Creature activeCreature = null;
     bool isBattleWon = false;
     public BattleState CurrentState
     {
@@ -45,6 +49,7 @@ public class BattleManager : MonoBehaviour
 
         //The enemy and player needs to have spawned in and be initialized before this runs. Otherwise their stats will all be 0
         InitalizeBattle();
+        
     }
 
     private void Update()
@@ -68,10 +73,9 @@ public class BattleManager : MonoBehaviour
         currentTurn = 1;
         CreateStartOrder();
 
-        CurrentState = (BattleOrder[0] == Player) ? BattleState.PlayerTurn : BattleState.EnemyTurn;
+        CurrentState = (activeCreature == Player) ? BattleState.PlayerTurn : BattleState.EnemyTurn;
 
         Debug.Log($"Turn: {CurrentState}");
-        //CurrentState = BattleState.PlayerTurn;
     }
     /// <summary>
     /// Changes the state of the current battle
@@ -96,6 +100,10 @@ public class BattleManager : MonoBehaviour
     private void WinBattle()
     {
         isBattleWon = true;
+        foreach (Creature creature in BattleOrder)
+        {
+            creature.OnEndTurn -= AddTurn;
+        }
     }
     /// <summary>
     /// This happends when you lose a battle
@@ -108,17 +116,20 @@ public class BattleManager : MonoBehaviour
     public void AddTurn()
     {
         currentTurn++;
+        //OnAddTurn.Invoke();
         if (currentState == BattleState.Win || currentState == BattleState.Lose)
         {
             return;
         }
-        else if (currentState == BattleState.PlayerTurn)
-        {
-            ChangeState(BattleState.EnemyTurn);
-        }
-        else if (currentState == BattleState.EnemyTurn)
+        activeCreature = GetNextInBattleOrder();
+        if (activeCreature == Player)
         {
             ChangeState(BattleState.PlayerTurn);
+        }
+        else 
+        {
+            ChangeState(BattleState.EnemyTurn);
+            activeCreature.StartTurn();
         }
         Debug.Log("Turn: " + currentTurn);
     }
@@ -159,8 +170,21 @@ public class BattleManager : MonoBehaviour
         BattleOrder.Add(Player);
         UsefulFunctions.IntersertionSort(BattleOrder);
 
-
+        activeCreature = BattleOrder[0];
+        foreach(Creature creature in BattleOrder)
+        {
+            creature.OnEndTurn += AddTurn;
+        }
     }
 
+    private Creature GetNextInBattleOrder()
+    {
+        int nextCreatureIndex = BattleOrder.IndexOf(activeCreature) + 1;
+        if (nextCreatureIndex >= BattleOrder.Count)
+        {
+            return BattleOrder[0];
+        }
+        return BattleOrder[nextCreatureIndex];
+    }
 
 }

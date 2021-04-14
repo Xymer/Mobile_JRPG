@@ -46,6 +46,7 @@ public class Enemy : Creature
 
         expDrop = enemyData.expDrop;
         goldDrop = enemyData.goldDrop;
+       
 
     }
 

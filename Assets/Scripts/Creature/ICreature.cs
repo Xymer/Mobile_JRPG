@@ -35,9 +35,5 @@ public interface ICreature
     public void TakeDamage(int damageIn);
 
 
-    /// <summary>
-    /// Event when a creature has ended it's turn
-    /// </summary>
-    public void OnTurnTaken();
 }
 
