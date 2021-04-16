@@ -23,11 +23,15 @@ public class BattleManager : MonoBehaviour
     public delegate void OnAddTurnDelegate();
     public event OnAddTurnDelegate OnAddTurn;
 
+    public delegate void OnCreateStartOrderDelegate();
+    public event OnCreateStartOrderDelegate OnCreateStartOrder;
+
     int currentTurn = 0;
     private BattleState currentState;
 
     private List<Enemy> EnemiesInCurrentBattle = new List<Enemy>();
-    private List<Creature> BattleOrder = new List<Creature>();
+    private List<Creature> battleOrder = new List<Creature>();
+    public List<Creature> BattleOrder { get => battleOrder; private set => battleOrder = value; }
 
     private Creature activeCreature = null;
     bool isBattleWon = false;
@@ -36,6 +40,7 @@ public class BattleManager : MonoBehaviour
         get { return currentState; }
         private set { currentState = value; }
     }
+
 
     private void OnEnable()
     {
@@ -100,7 +105,7 @@ public class BattleManager : MonoBehaviour
     private void WinBattle()
     {
         isBattleWon = true;
-        foreach (Creature creature in BattleOrder)
+        foreach (Creature creature in battleOrder)
         {
             creature.OnEndTurn -= AddTurn;
         }
@@ -158,33 +163,34 @@ public class BattleManager : MonoBehaviour
     private void CreateStartOrder()
     {
         //Remove all elements and trim capacity back to 0
-        BattleOrder.Clear();
-        BattleOrder.TrimExcess();
+        battleOrder.Clear();
+        battleOrder.TrimExcess();
 
 
         for (int i = 0; i < EnemiesInCurrentBattle.Count; i++)
         {
-            BattleOrder.Add(EnemiesInCurrentBattle[i]);
+            battleOrder.Add(EnemiesInCurrentBattle[i]);
         }
 
-        BattleOrder.Add(Player);
-        UsefulFunctions.IntersertionSort(BattleOrder);
+        battleOrder.Add(Player);
+        UsefulFunctions.IntersertionSort(battleOrder);
 
-        activeCreature = BattleOrder[0];
-        foreach(Creature creature in BattleOrder)
+        activeCreature = battleOrder[0];
+        foreach(Creature creature in battleOrder)
         {
             creature.OnEndTurn += AddTurn;
         }
+        OnCreateStartOrder.Invoke();
     }
 
     private Creature GetNextInBattleOrder()
     {
-        int nextCreatureIndex = BattleOrder.IndexOf(activeCreature) + 1;
-        if (nextCreatureIndex >= BattleOrder.Count)
+        int nextCreatureIndex = battleOrder.IndexOf(activeCreature) + 1;
+        if (nextCreatureIndex >= battleOrder.Count)
         {
-            return BattleOrder[0];
+            return battleOrder[0];
         }
-        return BattleOrder[nextCreatureIndex];
+        return battleOrder[nextCreatureIndex];
     }
 
 }

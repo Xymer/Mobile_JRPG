@@ -13,6 +13,8 @@ public class Creature : MonoBehaviour, ICreature
     public event OnStartTurnDelegate OnStartTurn;
 
     protected int maxHitPoints = 0;
+    public int MaxHitPoints { get => maxHitPoints; private set => maxHitPoints = value; }
+    public int CurrentHitPoints { get => currentHitPoints; private set => currentHitPoints = value; }
     protected int currentHitPoints = 0;
 
     protected int maxMagicPoints = 0;
@@ -26,6 +28,8 @@ public class Creature : MonoBehaviour, ICreature
     protected int agility = 0;
 
     protected bool killed = false;
+
+
     public int GetAgility() { return agility; }
 
   
@@ -71,6 +75,10 @@ public class Creature : MonoBehaviour, ICreature
         if (this is Enemy)
         {
             SpellAttack();           
+        }
+        if (OnStartTurn == null)
+        {
+            return;
         }
         OnStartTurn.Invoke();
     }
