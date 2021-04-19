@@ -40,7 +40,7 @@ public class BattleManager : MonoBehaviour
         get { return currentState; }
         private set { currentState = value; }
     }
-
+    // activeCreature == OnSwitchCreature Creature
 
     private void OnEnable()
     {
@@ -105,6 +105,8 @@ public class BattleManager : MonoBehaviour
     private void WinBattle()
     {
         isBattleWon = true;
+
+        //Safety so nothing lingers
         foreach (Creature creature in battleOrder)
         {
             creature.OnEndTurn -= AddTurn;
@@ -121,12 +123,13 @@ public class BattleManager : MonoBehaviour
     public void AddTurn()
     {
         currentTurn++;
-        //OnAddTurn.Invoke();
         if (currentState == BattleState.Win || currentState == BattleState.Lose)
         {
             return;
         }
+
         activeCreature = GetNextInBattleOrder();
+
         if (activeCreature == Player)
         {
             ChangeState(BattleState.PlayerTurn);
@@ -136,6 +139,7 @@ public class BattleManager : MonoBehaviour
             ChangeState(BattleState.EnemyTurn);
             activeCreature.StartTurn();
         }
+        //OnAddTurn.Invoke(); Vad skulle behöva lyssna på denna?
         Debug.Log("Turn: " + currentTurn);
     }
 

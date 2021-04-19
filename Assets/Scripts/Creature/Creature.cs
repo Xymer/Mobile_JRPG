@@ -12,8 +12,12 @@ public class Creature : MonoBehaviour, ICreature
     public delegate void OnStartTurnDelegate();
     public event OnStartTurnDelegate OnStartTurn;
 
+    public delegate int OnTakeDamageDelegate();
+    public event OnTakeDamageDelegate OnTakeDamage;
+
     protected int maxHitPoints = 0;
     public int MaxHitPoints { get => maxHitPoints; private set => maxHitPoints = value; }
+
     public int CurrentHitPoints { get => currentHitPoints; private set => currentHitPoints = value; }
     protected int currentHitPoints = 0;
 
@@ -47,7 +51,6 @@ public class Creature : MonoBehaviour, ICreature
 
     public void SpellAttack()
     {
-
         OnEndTurn.Invoke();
     }
 
@@ -67,6 +70,8 @@ public class Creature : MonoBehaviour, ICreature
 
         if (currentHitPoints <= 0)
             killed = true;
+
+  
         Debug.Log("Current HP: " + currentHitPoints);
     }
 

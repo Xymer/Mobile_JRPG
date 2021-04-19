@@ -34,6 +34,8 @@ public class PlayerCharacter : Creature, IPlayer
     {
         experiencePoints += pointsToAdd;
         experiencePointsToNextLevel -= pointsToAdd;
+        //TODO: Create callback for when experience to next level exceeds 0 and reduce next level experience points by the leftover
+
         if (experiencePointsToNextLevel <= 0 )
         {
             LevelUp();
@@ -60,7 +62,5 @@ public class PlayerCharacter : Creature, IPlayer
 
         luck = playerData.luck;
         agility = playerData.agility;
-
-        
     }
 }
