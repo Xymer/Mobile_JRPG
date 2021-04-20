@@ -27,10 +27,10 @@ public class Enemy : Creature
         if (enemyData == null)
             throw new NullReferenceException();
 
-        EnemyAI = GetComponent<EnemyAI>();
+        //EnemyAI = GetComponent<EnemyAI>();
 
-        if (EnemyAI == null)
-            throw new NullReferenceException();
+        //if (EnemyAI == null)
+        //    throw new NullReferenceException();
 
         maxHitPoints = enemyData.maxHitPoints;
         currentHitPoints = enemyData.maxHitPoints;

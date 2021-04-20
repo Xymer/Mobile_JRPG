@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
 
-    private PlayerCharacter player;
-    private Enemy targetedEnemy;
-    private BattleManager battleManager;
+    private PlayerCharacter player = null;
+    private Enemy targetedEnemy = null;
+    private BattleManager battleManager = null;
+    private Camera mainCamera = null;
     [SerializeField] private Button attackButton = null;
     [SerializeField] private Button skillButton = null;
     [SerializeField] private Button exitSkillListButton = null;
@@ -27,7 +28,6 @@ public class BattleUI : MonoBehaviour
     }
     private void Start()
     {
-
     }
     private void Update()
     {
@@ -36,14 +36,13 @@ public class BattleUI : MonoBehaviour
     private void Initalize()
     {
         battleManager = FindObjectOfType<BattleManager>();
-        player = FindObjectOfType<PlayerCharacter>();
-        targetedEnemy = FindObjectOfType<Enemy>(true);
-
+        player = FindObjectOfType<PlayerCharacter>();        
+        mainCamera = FindObjectOfType<Camera>(true);
 
         attackButton.onClick.AddListener(delegate { player.Attack(targetedEnemy); });
         unclickableButtons.Add(attackButton);
 
-        battleManager.OnChangeState += SetClickableButtons; //TODO: Seeing a bug with this later when we add multiple enemies
+        battleManager.OnChangeState += SetClickableButtons; //TODO: Seeing a bug with this later when we add multiple enemies       
         battleManager.OnCreateStartOrder += GenerateHealthBar;
     }
     private void SetClickableButtons()
@@ -55,14 +54,26 @@ public class BattleUI : MonoBehaviour
     }
     private void GenerateHealthBar()
     {
-        foreach (Creature creature in battleManager.BattleOrder)
+        List<Creature> temp = battleManager.BattleOrder;
+        //for (int i = 0; i < temp.Count; i++)
+        //{
+
+        //    GameObject GO = Instantiate(healthBar);
+        //    HealthBar HPbar = GO.GetComponent<HealthBar>();
+        //    HPbar.Parent = temp[i];
+        //    HPbar.transform.position = mainCamera.WorldToScreenPoint(HPbar.Parent.transform.position) + new Vector3(0.0f, 200f);
+        //    HPbar.enabled = true;
+        //}
+        foreach (Creature creature in temp)
         {
-            GameObject GO = Instantiate(healthBar);
-            GO.transform.SetParent(healthBarParent.transform);
+            if (creature is Enemy)
+            {
+                targetedEnemy = creature as Enemy;
+            }
+            GameObject GO = Instantiate(healthBar, healthBarParent.transform);
             HealthBar HPbar = GO.GetComponent<HealthBar>();
             HPbar.Parent = creature;
-
-            HPbar.transform.position = FindObjectOfType<Camera>().WorldToScreenPoint(HPbar.Parent.transform.position) + new Vector3(0.0f,200f); 
+            HPbar.transform.position = mainCamera.WorldToScreenPoint(HPbar.Parent.transform.position) + new Vector3(0.0f, 200f);
             HPbar.enabled = true;
         }
     }
