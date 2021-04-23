@@ -12,8 +12,11 @@ public class Creature : MonoBehaviour, ICreature
     public delegate void OnStartTurnDelegate();
     public event OnStartTurnDelegate OnStartTurn;
 
-    public delegate int OnTakeDamageDelegate();
+    public delegate void OnTakeDamageDelegate();
     public event OnTakeDamageDelegate OnTakeDamage;
+
+    public delegate void OnDeathDelegate();
+    public event OnDeathDelegate OnDeath;
 
     protected int maxHitPoints = 0;
     public int MaxHitPoints { get => maxHitPoints; private set => maxHitPoints = value; }
@@ -61,18 +64,22 @@ public class Creature : MonoBehaviour, ICreature
         otherCreature.TakeDamage(toAttack);
 
         OnEndTurn.Invoke();
-        
     }
 
     public void TakeDamage(int damageIn)
     {
-        currentHitPoints -= damageIn;
+        CurrentHitPoints -= damageIn;
 
-        if (currentHitPoints <= 0)
+        if (CurrentHitPoints <= 0)
+        {
+            if (OnDeath != null)
+            {
+            OnDeath.Invoke();
+            }
             killed = true;
-
-  
+        }
         Debug.Log("Current HP: " + currentHitPoints);
+        OnTakeDamage.Invoke();
     }
 
     public void StartTurn()

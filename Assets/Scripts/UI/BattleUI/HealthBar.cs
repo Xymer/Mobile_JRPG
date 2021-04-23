@@ -27,6 +27,14 @@ public class HealthBar : MonoBehaviour
         mask.fillAmount = fillAmount;
         healthBarText = GetComponentInChildren<Text>();
         healthBarText.text = HEALTH + parent.CurrentHitPoints + '/' + parent.MaxHitPoints;
+        parent.OnTakeDamage += UpdateHealthBar;
     }
+   private void UpdateHealthBar()
+    {
+        lastCurrentHitpoints = parent.CurrentHitPoints;
+        fillAmount = (float)parent.CurrentHitPoints / (float)parent.MaxHitPoints;
+        mask.fillAmount = fillAmount;
 
+        healthBarText.text = HEALTH + parent.CurrentHitPoints + '/' + parent.MaxHitPoints;
+    }
 }
