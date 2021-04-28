@@ -35,11 +35,12 @@ public class Creature : MonoBehaviour, ICreature
     protected int agility = 0;
 
     protected bool killed = false;
-
+    protected bool hasTakenTurn = false;
+    public bool HasTakenturn { get => hasTakenTurn; set => hasTakenTurn = value; }
 
     public int GetAgility() { return agility; }
 
-  
+
     public int CalculateAttack(Creature otherCreature)
     {
         int totalDamage = attack * Mathf.RoundToInt((100f / (100f + otherCreature.defence)));
@@ -74,7 +75,7 @@ public class Creature : MonoBehaviour, ICreature
         {
             if (OnDeath != null)
             {
-            OnDeath.Invoke();
+                OnDeath.Invoke();
             }
             killed = true;
         }
@@ -84,14 +85,16 @@ public class Creature : MonoBehaviour, ICreature
 
     public void StartTurn()
     {
+        OnStartTurn.Invoke();
+
+        // Just for testing, will change when enemy AI is in place
         if (this is Enemy)
         {
-            SpellAttack();           
+            SpellAttack();
         }
         if (OnStartTurn == null)
         {
             return;
         }
-        OnStartTurn.Invoke();
     }
 }

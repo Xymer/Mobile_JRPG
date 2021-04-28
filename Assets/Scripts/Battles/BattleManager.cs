@@ -109,7 +109,7 @@ public class BattleManager : MonoBehaviour
         //Safety so nothing lingers
         foreach (Creature creature in battleOrder)
         {
-            creature.OnEndTurn -= AddTurn;
+            creature.OnStartTurn -= AddTurn;
         }
     }
     /// <summary>
@@ -182,7 +182,7 @@ public class BattleManager : MonoBehaviour
         activeCreature = battleOrder[0];
         foreach(Creature creature in battleOrder)
         {
-            creature.OnEndTurn += AddTurn;
+            creature.OnStartTurn += AddTurn;
         }
         OnCreateStartOrder.Invoke();
     }
@@ -196,5 +196,20 @@ public class BattleManager : MonoBehaviour
         }
         return battleOrder[nextCreatureIndex];
     }
-
+    private void SelectNextInBattleOrder()
+    {
+        UsefulFunctions.IntersertionSort(battleOrder);
+        for (int i = 0; i < battleOrder.Count; i++)
+        {
+            if (battleOrder[i].HasTakenturn)
+            {
+                continue;
+            }
+            else
+            {
+                activeCreature = battleOrder[i];
+                break;
+            }
+        }
+    }
 }
