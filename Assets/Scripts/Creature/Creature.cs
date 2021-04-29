@@ -12,8 +12,11 @@ public class Creature : MonoBehaviour, ICreature
     public delegate void OnStartTurnDelegate();
     public event OnStartTurnDelegate OnStartTurn;
 
-    public delegate int OnTakeDamageDelegate();
+    public delegate void OnTakeDamageDelegate();
     public event OnTakeDamageDelegate OnTakeDamage;
+
+    public delegate void OnDeathDelegate();
+    public event OnDeathDelegate OnDeath;
 
     protected int maxHitPoints = 0;
     public int MaxHitPoints { get => maxHitPoints; private set => maxHitPoints = value; }
@@ -32,11 +35,12 @@ public class Creature : MonoBehaviour, ICreature
     protected int agility = 0;
 
     protected bool killed = false;
-
+    protected bool hasTakenTurn = false;
+    public bool HasTakenturn { get => hasTakenTurn; set => hasTakenTurn = value; }
 
     public int GetAgility() { return agility; }
 
-  
+
     public int CalculateAttack(Creature otherCreature)
     {
         int totalDamage = attack * Mathf.RoundToInt((100f / (100f + otherCreature.defence)));
@@ -61,30 +65,36 @@ public class Creature : MonoBehaviour, ICreature
         otherCreature.TakeDamage(toAttack);
 
         OnEndTurn.Invoke();
-        
     }
 
     public void TakeDamage(int damageIn)
     {
-        currentHitPoints -= damageIn;
+        CurrentHitPoints -= damageIn;
 
-        if (currentHitPoints <= 0)
+        if (CurrentHitPoints <= 0)
+        {
+            if (OnDeath != null)
+            {
+                OnDeath.Invoke();
+            }
             killed = true;
-
-  
+        }
         Debug.Log("Current HP: " + currentHitPoints);
+        OnTakeDamage.Invoke();
     }
 
     public void StartTurn()
     {
+        OnStartTurn.Invoke();
+
+        // Just for testing, will change when enemy AI is in place
         if (this is Enemy)
         {
-            SpellAttack();           
+            SpellAttack();
         }
         if (OnStartTurn == null)
         {
             return;
         }
-        OnStartTurn.Invoke();
     }
 }
