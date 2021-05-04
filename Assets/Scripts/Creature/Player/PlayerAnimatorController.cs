@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace AnimatorController
 {
@@ -59,7 +60,7 @@ namespace AnimatorController
             }
 
             currentState = parameter;
-
+            
         }
 
 

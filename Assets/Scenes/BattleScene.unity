@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b591aacf7494341a00a2f5cb556735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackButton: {fileID: 1577516366}
+  attackButton: {fileID: 159936620}
   skillButton: {fileID: 0}
   exitSkillListButton: {fileID: 0}
   fleeButton: {fileID: 0}

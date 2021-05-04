@@ -28,6 +28,7 @@ public class HealthBar : MonoBehaviour
         healthBarText = GetComponentInChildren<Text>();
         healthBarText.text = HEALTH + parent.CurrentHitPoints + '/' + parent.MaxHitPoints;
         parent.OnTakeDamage += UpdateHealthBar;
+        parent.OnDeath += DestroyHealthBar;
     }
    private void UpdateHealthBar()
     {
@@ -36,5 +37,9 @@ public class HealthBar : MonoBehaviour
         mask.fillAmount = fillAmount;
 
         healthBarText.text = HEALTH + parent.CurrentHitPoints + '/' + parent.MaxHitPoints;
+    }
+    private void DestroyHealthBar()
+    {
+        Destroy(this.gameObject);
     }
 }

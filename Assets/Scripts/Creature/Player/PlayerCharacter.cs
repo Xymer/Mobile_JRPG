@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using AnimatorController;
 
 public class PlayerCharacter : Creature, IPlayer
 {
 
+   
     public Player_SO playerData;
 
     private AnimatorController.PlayerAnimatorController animatorController;
+    public PlayerAnimatorController AnimatorController { get => animatorController; private set => animatorController = value; }
 
     private int currentLevel = 1;
     private int experiencePoints = 0;
@@ -78,5 +81,6 @@ public class PlayerCharacter : Creature, IPlayer
 
         luck = playerData.luck;
         agility = playerData.agility;
+        OnEndTurn += PlayIdleAnimation;
     }
 }

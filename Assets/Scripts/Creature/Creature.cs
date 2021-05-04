@@ -24,6 +24,9 @@ public class Creature : MonoBehaviour, ICreature
     public int CurrentHitPoints { get => currentHitPoints; private set => currentHitPoints = value; }
     protected int currentHitPoints = 0;
 
+    private Creature targetedCreature = null;
+    public Creature TargetedCreature { get => targetedCreature; set => targetedCreature = value; }
+
     protected int maxMagicPoints = 0;
     protected int currentMagicPoints = 0;
 
@@ -58,11 +61,11 @@ public class Creature : MonoBehaviour, ICreature
         OnEndTurn.Invoke();
     }
 
-    public void Attack(Creature otherCreature)
+    public void Attack()
     {
-        int toAttack = CalculateAttack(otherCreature);
+        int toAttack = CalculateAttack(targetedCreature);
 
-        otherCreature.TakeDamage(toAttack);
+        targetedCreature.TakeDamage(toAttack);
         if (OnEndTurn != null)
         {
             OnEndTurn.Invoke();
@@ -97,6 +100,22 @@ public class Creature : MonoBehaviour, ICreature
         if (OnStartTurn == null)
         {
             return;
+        }
+    }
+    public void PlayAttackAnimation()
+    {
+        if (this is PlayerCharacter)
+        {
+            PlayerCharacter player = (PlayerCharacter)this;
+            player.AnimatorController.SwitchState(AnimationParameters.Attack);
+        }
+    }
+    protected void PlayIdleAnimation()
+    {
+        if (this is PlayerCharacter)
+        {
+            PlayerCharacter player = (PlayerCharacter)this;
+            player.AnimatorController.SwitchState(AnimationParameters.Idle);
         }
     }
 }

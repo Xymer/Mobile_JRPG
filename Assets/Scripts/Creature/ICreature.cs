@@ -27,7 +27,7 @@ public interface ICreature
     /// Check the <see cref="CalculateAttack(Creature)"/> summary for more information on the attack calulations.
     /// </remarks>
     /// <param name="otherCreature">The target</param>
-    public void Attack(Creature otherCreature);
+    public void Attack();
     /// <summary>
     /// Removes as set amount of damage from the creatures current health.
     /// </summary>

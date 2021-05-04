@@ -39,7 +39,7 @@ public class BattleUI : MonoBehaviour
         player = FindObjectOfType<PlayerCharacter>();        
         mainCamera = FindObjectOfType<Camera>(true);
 
-        attackButton.onClick.AddListener(delegate { player.Attack(targetedEnemy); });
+        attackButton.onClick.AddListener(delegate { player.TargetedCreature = targetedEnemy; player.PlayAttackAnimation(); });
         unclickableButtons.Add(attackButton);
 
         battleManager.OnChangeState += SetClickableButtons; //TODO: Seeing a bug with this later when we add multiple enemies       
