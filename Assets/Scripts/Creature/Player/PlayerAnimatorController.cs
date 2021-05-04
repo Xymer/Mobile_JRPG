@@ -10,8 +10,11 @@ namespace AnimatorController
     {
         private Animator animator;
 
+        private AnimationParameters currentState;
+
         private void Start()
         {
+            currentState = AnimationParameters.Idle;
             animator = GetComponent<Animator>();
             if (animator == null)
                 throw new NullReferenceException();
@@ -19,6 +22,10 @@ namespace AnimatorController
 
         public void SwitchState(AnimationParameters parameter)
         {
+
+            if (currentState == parameter)
+                return;
+
             ResetTriggers();
 
             switch (parameter)
@@ -51,6 +58,7 @@ namespace AnimatorController
                     throw new Exception();
             }
 
+            currentState = parameter;
 
         }
 
