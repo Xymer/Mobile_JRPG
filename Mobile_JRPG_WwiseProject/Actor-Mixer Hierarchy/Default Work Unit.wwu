@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{6A8C8C75-DEA4-4D9C-9C39-2A9325FC8CD1}" SchemaVersion="103">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{6A8C8C75-DEA4-4D9C-9C39-2A9325FC8CD1}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="sword_charge" ID="{ABD8FCDB-5816-491C-B08E-0C2E060FA9E3}" ShortID="351056516">
+					<PropertyList>
+						<Property Name="Highpass" Type="int16">
+							<ValueList>
+								<Value>39</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-3</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{31BA4531-0D01-488C-BBED-E25955488B34}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2215D252-1530-4095-85D6-626644B62C7A}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="spf_sword_charge" ID="{0BA1F107-BF20-4CC9-8A6F-952C78CC13C4}">
+							<Language>SFX</Language>
+							<AudioFile>spf_sword_charge.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="594194422"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="spf_sword_charge" ID="{0BA1F107-BF20-4CC9-8A6F-952C78CC13C4}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="sword_hit" ID="{9B2AAFF0-4D36-473F-A27D-575414601991}" ShortID="1028122465">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{31BA4531-0D01-488C-BBED-E25955488B34}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2215D252-1530-4095-85D6-626644B62C7A}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="spf_sword_hit" ID="{E65C5A92-E0C5-477C-8105-B50F16F408ED}">
+							<Language>SFX</Language>
+							<AudioFile>spf_sword_hit.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="155231622"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="spf_sword_hit" ID="{E65C5A92-E0C5-477C-8105-B50F16F408ED}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="sword_miss" ID="{B313B6A8-DFFD-4303-B875-F67530B89611}" ShortID="836538660">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{31BA4531-0D01-488C-BBED-E25955488B34}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2215D252-1530-4095-85D6-626644B62C7A}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="spf_sword_miss" ID="{D0A1763A-6422-461C-8907-1DEEDFE8D58B}">
+							<Language>SFX</Language>
+							<AudioFile>spf_sword_miss.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="575227967"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="spf_sword_miss" ID="{D0A1763A-6422-461C-8907-1DEEDFE8D58B}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
