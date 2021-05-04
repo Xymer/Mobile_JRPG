@@ -1,34 +1,25 @@
 fileFormatVersion: 2
-guid: 4639c5b9b33c1e74794510e337afca39
+guid: 98c56d83727feff41a6c3c16ad26d530
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3800782402952206127
-    second: Border_Corner_TL
+      213: 698430728521136638
+    second: Button_Attack_1
   - first:
-      213: -7117176613107577440
-    second: Border_Top
+      213: 1964075685110367972
+    second: Button_Defend_1
   - first:
-      213: 9156156023691482455
-    second: Border_Corner_T
+      213: -834293490080264960
+    second: Button_Spells_1
   - first:
-      213: -5155470640856005881
-    second: Border_Left
+      213: -8520970268396858581
+    second: Button_Attack_2
   - first:
-      213: -8524845755614569565
-    second: TextBox_Middle
+      213: -7005856557365318176
+    second: Button_Defend_2
   - first:
-      213: 36453689603369299
-    second: Border_Right
-  - first:
-      213: -351348561788081253
-    second: Border_Corner_BL
-  - first:
-      213: 4654127433726271893
-    second: Border_Bottom
-  - first:
-      213: -788576375567086289
-    second: Border_Corner_BR
+      213: -3051501243941637152
+    second: Button_Spells_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -69,7 +60,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -130,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Border_Corner_TL
+      name: Button_Attack_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
-        width: 8
-        height: 8
+        y: 40
+        width: 64
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f27958445771fb430800000000000000
-      internalID: 3800782402952206127
+      spriteID: ef938b11c0351b900800000000000000
+      internalID: 698430728521136638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border_Top
+      name: Button_Defend_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 24
-        width: 16
-        height: 8
+        x: 72
+        y: 40
+        width: 64
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ad410c2495ba3d90800000000000000
-      internalID: -7117176613107577440
+      spriteID: 4e64cf2fd6cc14b10800000000000000
+      internalID: 1964075685110367972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border_Corner_T
+      name: Button_Spells_1
       rect:
         serializedVersion: 2
-        x: 24
-        y: 24
-        width: 8
-        height: 8
+        x: 144
+        y: 40
+        width: 64
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,83 +177,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7551f246463311f70800000000000000
-      internalID: 9156156023691482455
+      spriteID: 00d4855bd7efb64f0800000000000000
+      internalID: -834293490080264960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border_Left
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 70382d954c61478b0800000000000000
-      internalID: -5155470640856005881
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TextBox_Middle
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3abd89ba3f9a1b980800000000000000
-      internalID: -8524845755614569565
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border_Right
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 8
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 359af830072818000800000000000000
-      internalID: 36453689603369299
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Border_Corner_BL
+      name: Button_Attack_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
-        height: 8
+        width: 64
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,20 +198,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9be6463852cf1bf0800000000000000
-      internalID: -351348561788081253
+      spriteID: b235a8adfae6fb980800000000000000
+      internalID: -8520970268396858581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border_Bottom
+      name: Button_Defend_2
       rect:
         serializedVersion: 2
-        x: 8
+        x: 72
         y: 0
-        width: 16
-        height: 8
+        width: 64
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 591a7aa0e38c69040800000000000000
-      internalID: 4654127433726271893
+      spriteID: 0ed26e6649236ce90800000000000000
+      internalID: -7005856557365318176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border_Corner_BR
+      name: Button_Spells_2
       rect:
         serializedVersion: 2
-        x: 24
+        x: 144
         y: 0
-        width: 8
-        height: 8
+        width: 64
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,8 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2d0f08e6f96e05f0800000000000000
-      internalID: -788576375567086289
+      spriteID: 0e3323349c3e6a5d0800000000000000
+      internalID: -3051501243941637152
       vertices: []
       indices: 
       edges: []
