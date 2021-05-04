@@ -14,7 +14,7 @@ public enum BattleState
 public class BattleManager : MonoBehaviour
 {
 
-    private PlayerCharacter Player;
+    private PlayerCharacter player;
     private MonsterManager mm;
 
     public delegate void OnChangeStateDelegate();
@@ -48,7 +48,7 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         mm = GetComponent<MonsterManager>();
-        Player = FindObjectOfType<PlayerCharacter>();
+        player = FindObjectOfType<PlayerCharacter>();
 
         GetEnemiesForCurrentBattle();
 
@@ -78,7 +78,7 @@ public class BattleManager : MonoBehaviour
         currentTurn = 1;
         CreateStartOrder();
 
-        CurrentState = (activeCreature == Player) ? BattleState.PlayerTurn : BattleState.EnemyTurn;
+        CurrentState = (activeCreature == player) ? BattleState.PlayerTurn : BattleState.EnemyTurn;
 
         Debug.Log($"Turn: {CurrentState}");
     }
@@ -130,7 +130,7 @@ public class BattleManager : MonoBehaviour
 
         activeCreature = GetNextInBattleOrder();
 
-        if (activeCreature == Player)
+        if (activeCreature == player)
         {
             ChangeState(BattleState.PlayerTurn);
         }
@@ -171,12 +171,13 @@ public class BattleManager : MonoBehaviour
         battleOrder.TrimExcess();
 
 
-        for (int i = 0; i < EnemiesInCurrentBattle.Count; i++)
+        foreach (Creature creature in EnemiesInCurrentBattle)
         {
-            battleOrder.Add(EnemiesInCurrentBattle[i]);
-        }
+            battleOrder.Add(creature);
+            creature.OnDeath += RemoveCreatureOnDeath;
+        }               
 
-        battleOrder.Add(Player);
+        battleOrder.Add(player);
         UsefulFunctions.IntersertionSort(battleOrder);
 
         activeCreature = battleOrder[0];
@@ -211,5 +212,22 @@ public class BattleManager : MonoBehaviour
                 break;
             }
         }
+    }
+    private void RemoveCreatureOnDeath()
+    {
+        Creature creatureToRemove = null;
+        foreach (Creature creature in EnemiesInCurrentBattle)
+        {
+            if (creature.CurrentHitPoints <= 0)
+            {
+                creatureToRemove = creature;
+                break;
+            }
+        }
+        EnemiesInCurrentBattle.Remove(creatureToRemove as Enemy);
+        creatureToRemove.OnStartTurn -= AddTurn;
+        creatureToRemove.OnDeath -= RemoveCreatureOnDeath;
+
+        Destroy(creatureToRemove.gameObject);
     }
 }
