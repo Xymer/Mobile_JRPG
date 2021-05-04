@@ -8,3 +8,13 @@ public enum JobClasses
     Mage,
     Archer
 }
+
+public enum AnimationParameters
+{
+    Attack,
+    Dying,
+    Dead,
+    Idle,
+    TakeDamage,
+    StartBattle
+}
