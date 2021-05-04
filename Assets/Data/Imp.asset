@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4847d092dd8ba048a20bb9ada6a3004, type: 3}
+  m_Name: Imp
+  m_EditorClassIdentifier: 
+  maxHitPoints: 20
+  currentHitPoints: 20
+  maxMagicPoints: 5
+  currentMagicPoints: 5
+  attack: 5
+  defence: 10
+  luck: 15
+  agility: 6
+  enemyName: Imp
+  expDrop: 1
+  goldDrop: 2

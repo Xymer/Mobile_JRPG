@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="12" SoundbankVersion="140">
+	<RootPaths>
+		<ProjectRoot>S:\DEV\Degree\Mobile_JRPG\Mobile_JRPG_WwiseProject\</ProjectRoot>
+		<SourceFilesRoot>S:\DEV\Degree\Mobile_JRPG\Mobile_JRPG_WwiseProject\.cache\Mac\</SourceFilesRoot>
+		<SoundBanksRoot>S:\DEV\Degree\Mobile_JRPG\Mobile_JRPG_WwiseProject\GeneratedSoundBanks\Mac\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>S:\DEV\Degree\Mobile_JRPG\Mobile_JRPG_WwiseProject\GeneratedSoundBanks\Mac</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Language="SFX" Hash="2754342975">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="2641024368" Language="SFX" Hash="2592411981">
+			<ObjectPath>\SoundBanks\Default Work Unit\SFX_SoundBank</ObjectPath>
+			<ShortName>SFX_SoundBank</ShortName>
+			<Path>SFX_SoundBank.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

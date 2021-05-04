@@ -7,6 +7,9 @@ public class PlayerCharacter : Creature, IPlayer
 {
 
     public Player_SO playerData;
+
+    private AnimatorController.PlayerAnimatorController animatorController;
+
     private int currentLevel = 1;
     private int experiencePoints = 0;
 
@@ -42,6 +45,14 @@ public class PlayerCharacter : Creature, IPlayer
         }
     }
 
+    // ???? where do we do the kewl animation ddues
+    //public override void Attack(Creature otherCreature)
+    //{
+    //    animatorController.SwitchState(AnimationParameters.Attack);
+    //    base.Attack(otherCreature);
+    //}
+
+
     public void EquipItem()
     {
         throw new NotImplementedException();
@@ -50,6 +61,11 @@ public class PlayerCharacter : Creature, IPlayer
     {
         if (playerData == null)
             throw new NullReferenceException();
+
+        animatorController = GetComponent<AnimatorController.PlayerAnimatorController>();
+        if (animatorController == null)
+            throw new NullReferenceException();
+
 
         maxHitPoints = playerData.maxHitPoints;
         currentHitPoints = playerData.maxHitPoints;

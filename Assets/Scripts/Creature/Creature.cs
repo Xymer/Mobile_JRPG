@@ -15,8 +15,8 @@ public class Creature : MonoBehaviour, ICreature
     public delegate void OnTakeDamageDelegate();
     public event OnTakeDamageDelegate OnTakeDamage;
 
-    public delegate void OnDeathDelegate();
-    public event OnDeathDelegate OnDeath;
+    public delegate void OnDeathDelegate<Creature>();
+    public event OnDeathDelegate<Creature> OnDeath;
 
     protected int maxHitPoints = 0;
     public int MaxHitPoints { get => maxHitPoints; private set => maxHitPoints = value; }
@@ -63,8 +63,10 @@ public class Creature : MonoBehaviour, ICreature
         int toAttack = CalculateAttack(otherCreature);
 
         otherCreature.TakeDamage(toAttack);
-
-        OnEndTurn.Invoke();
+        if (OnEndTurn != null)
+        {
+            OnEndTurn.Invoke();
+        }
     }
 
     public void TakeDamage(int damageIn)

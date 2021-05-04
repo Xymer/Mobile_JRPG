@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{5DF85FE2-EA8E-49A3-86A6-BB01B3B51307}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{5DF85FE2-EA8E-49A3-86A6-BB01B3B51307}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="sword_charge_hit" ID="{A35989F4-F8A3-41B2-9809-4E1069FBB7CE}">
+					<ChildrenList>
+						<Action Name="" ID="{D3A0DD8B-6B6D-47AC-BA49-13139F8F50C3}" ShortID="468767622">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sword_charge" ID="{ABD8FCDB-5816-491C-B08E-0C2E060FA9E3}" WorkUnitID="{6A8C8C75-DEA4-4D9C-9C39-2A9325FC8CD1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{8D63742E-B25B-474B-A18D-449050085A52}" ShortID="727808863">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="0.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sword_hit" ID="{9B2AAFF0-4D36-473F-A27D-575414601991}" WorkUnitID="{6A8C8C75-DEA4-4D9C-9C39-2A9325FC8CD1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
