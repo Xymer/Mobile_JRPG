@@ -66,7 +66,8 @@ public class BattleManager : MonoBehaviour
         }
         else if (isBattleWon)
         {
-            // End battle and do stuff
+            // Display Victory Scene
+            // Do something more?
         }
     }
     /// <summary>
@@ -105,7 +106,7 @@ public class BattleManager : MonoBehaviour
     private void WinBattle()
     {
         isBattleWon = true;
-
+        ChangeState(BattleState.Win);
         //Safety so nothing lingers
         foreach (Creature creature in battleOrder)
         {
