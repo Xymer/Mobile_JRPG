@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Creature
 {
@@ -11,6 +12,10 @@ public class Enemy : Creature
     private int goldDrop = 0;
 
     private EnemyAI EnemyAI;
+
+    private Button selectionButton = null;
+
+    public Button SelectionButton { get => selectionButton; private set => selectionButton = value; }
 
     private void OnEnable()
     {
@@ -26,7 +31,11 @@ public class Enemy : Creature
     {
         if (enemyData == null)
             throw new NullReferenceException();
-
+        selectionButton = GetComponentInChildren<Button>();
+        if (!selectionButton)
+        {
+            throw new NullReferenceException($"Selection Button is null in: {gameObject.name}");
+        }
         //EnemyAI = GetComponent<EnemyAI>();
 
         //if (EnemyAI == null)
@@ -46,8 +55,6 @@ public class Enemy : Creature
 
         expDrop = enemyData.expDrop;
         goldDrop = enemyData.goldDrop;
-       
-
     }
 
     // Update is called once per frame
@@ -64,4 +71,5 @@ public class Enemy : Creature
     {
         
     }
+
 }

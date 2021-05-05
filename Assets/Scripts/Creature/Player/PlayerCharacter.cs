@@ -48,14 +48,6 @@ public class PlayerCharacter : Creature, IPlayer
         }
     }
 
-    // ???? where do we do the kewl animation ddues
-    //public override void Attack(Creature otherCreature)
-    //{
-    //    animatorController.SwitchState(AnimationParameters.Attack);
-    //    base.Attack(otherCreature);
-    //}
-
-
     public void EquipItem()
     {
         throw new NotImplementedException();
@@ -65,7 +57,7 @@ public class PlayerCharacter : Creature, IPlayer
         if (playerData == null)
             throw new NullReferenceException();
 
-        animatorController = GetComponent<AnimatorController.PlayerAnimatorController>();
+        animatorController = GetComponent<PlayerAnimatorController>();
         if (animatorController == null)
             throw new NullReferenceException();
 

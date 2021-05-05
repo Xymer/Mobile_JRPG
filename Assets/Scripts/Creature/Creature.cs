@@ -63,6 +63,14 @@ public class Creature : MonoBehaviour, ICreature
 
     public void Attack()
     {
+        if (!targetedCreature)
+        {
+            if (OnEndTurn != null)
+            {
+                OnEndTurn.Invoke();
+            }
+            return;
+        }
         int toAttack = CalculateAttack(targetedCreature);
 
         targetedCreature.TakeDamage(toAttack);

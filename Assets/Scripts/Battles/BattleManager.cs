@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BattleState
 {
@@ -15,6 +17,7 @@ public class BattleManager : MonoBehaviour
 {
 
     private PlayerCharacter player;
+    public PlayerCharacter Player { get => player; private set => player = value; }
     private MonsterManager mm;
 
     public delegate void OnChangeStateDelegate();
@@ -40,6 +43,9 @@ public class BattleManager : MonoBehaviour
         get { return currentState; }
         private set { currentState = value; }
     }
+
+
+
     // activeCreature == OnSwitchCreature Creature
 
     private void OnEnable()
@@ -54,7 +60,7 @@ public class BattleManager : MonoBehaviour
 
         //The enemy and player needs to have spawned in and be initialized before this runs. Otherwise their stats will all be 0
         InitalizeBattle();
-        
+
     }
 
     private void Update()
@@ -129,13 +135,13 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        activeCreature = GetNextInBattleOrder();
+        activeCreature = SelectNextInBattleOrder();
 
         if (activeCreature == player)
         {
             ChangeState(BattleState.PlayerTurn);
         }
-        else 
+        else
         {
             ChangeState(BattleState.EnemyTurn);
             activeCreature.StartTurn();
@@ -153,7 +159,7 @@ public class BattleManager : MonoBehaviour
         EnemiesInCurrentBattle.Clear();
         EnemiesInCurrentBattle.TrimExcess();
 
-        EnemiesInCurrentBattle = mm.GetMonstersForBattle(1);
+        EnemiesInCurrentBattle = mm.GetMonstersForBattle(2);
 
     }
 
@@ -176,15 +182,19 @@ public class BattleManager : MonoBehaviour
         {
             battleOrder.Add(creature);
             creature.OnDeath += RemoveCreatureOnDeath;
-        }               
+        }
 
         battleOrder.Add(player);
         UsefulFunctions.IntersertionSort(battleOrder);
 
         activeCreature = battleOrder[0];
-        foreach(Creature creature in battleOrder)
+        foreach (Creature creature in battleOrder)
         {
             creature.OnStartTurn += AddTurn;
+            if (creature is Enemy)
+            {
+                Enemy enemy = (Enemy)creature;
+            }
         }
         OnCreateStartOrder.Invoke();
     }
@@ -198,7 +208,7 @@ public class BattleManager : MonoBehaviour
         }
         return battleOrder[nextCreatureIndex];
     }
-    private void SelectNextInBattleOrder()
+    private Creature SelectNextInBattleOrder()
     {
         UsefulFunctions.IntersertionSort(battleOrder);
         for (int i = 0; i < battleOrder.Count; i++)
@@ -207,12 +217,20 @@ public class BattleManager : MonoBehaviour
             {
                 continue;
             }
+            else if (!battleOrder[i].HasTakenturn)
+            {
+                return battleOrder[i];
+            }
             else
             {
-                activeCreature = battleOrder[i];
-                break;
-            }
+                foreach (Creature creature in battleOrder)
+                {
+                    creature.HasTakenturn = false;
+                }
+                return SelectNextInBattleOrder();
+            }            
         }
+        throw new NullReferenceException($"No valid creatures in BattleOrder in BattleManager");
     }
     private void RemoveCreatureOnDeath()
     {
@@ -230,5 +248,10 @@ public class BattleManager : MonoBehaviour
         creatureToRemove.OnDeath -= RemoveCreatureOnDeath;
 
         Destroy(creatureToRemove.gameObject);
+    }
+
+    private void SetPlayerEnemyTarget(Button button)
+    {
+        player.TargetedCreature = button.GetComponentInParent<Enemy>();
     }
 }
